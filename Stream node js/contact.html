@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+</head>
+<style>
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f5f5;
+}
+
+/* Header */
+.header {
+  background: #ff7b00;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+/* Contact Section */
+.contact-section {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px;
+  gap: 20px;
+}
+
+.contact-info {
+  width: 40%;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.contact-form {
+  width: 55%;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.btn {
+  background: #ff7b00;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #e96f00;
+}
+
+</style>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <h2>Contact Us</h2>
+  </header>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+
+    <div class="contact-info">
+      <h3>Get in Touch</h3>
+      <p>Email: support@example.com</p>
+      <p>Phone: +91 9876543210</p>
+      <p>Address: 123 Shopping Street, Mumbai, India</p>
+    </div>
+
+    <form class="contact-form">
+      <h3>Send a Message</h3>
+      <input type="text" placeholder="Your Name" required>
+      <input type="email" placeholder="Your Email" required>
+      <input type="text" placeholder="Subject" required>
+      <textarea placeholder="Your Message" rows="5" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+
+  </section>
+
+</body>
+</html>
