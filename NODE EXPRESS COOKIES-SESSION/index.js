@@ -62,3 +62,19 @@ app.get('/logout', (req, res) => {
 app.listen(3000, () => {
     console.log('Server running on http://localhost:3000');
 });
+
+
+//Home
+//http://localhost:3000/
+
+//Cookie set
+👉 http://localhost:3000/set-cookie
+
+//Session set
+👉 http://localhost:3000/set-session
+
+//Session get
+//http://localhost:3000/get-session
+
+//Logout (session destroy)
+// http://localhost:3000/logout
