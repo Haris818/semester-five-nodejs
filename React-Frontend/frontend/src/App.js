@@ -1,165 +1,189 @@
 import { useState } from "react";
 
-function App() {
+export default function App() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: ""
   });
 
-  function handleChange(e) {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-  }
+  const handleChange = e =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  function handleSubmit(e) {
+  const handleSubmit = async e => {
     e.preventDefault();
 
-    fetch("http://localhost:5000/api/users", {
+    const res = await fetch("http://localhost:5000/api/users", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData)
-    })
-    .then(res => res.json())
-    .then(data => {
-      alert(data.message);
-      setFormData({ name: "", email: "", password: "" }); // clear form
-    })
-    .catch(err => console.log(err));
-  }
+    });
 
-  const styles = {
-    container: {
-      minHeight: "100vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      fontFamily: "'Poppins', sans-serif",
-      background: "linear-gradient(135deg, #667eea, #764ba2)",
-    },
-    form: {
-      background: "#fff",
-      padding: "40px 50px",
-      borderRadius: "15px",
-      boxShadow: "0 15px 30px rgba(0,0,0,0.2)",
-      width: "100%",
-      maxWidth: "400px",
-      textAlign: "center",
-      animation: "fadeIn 0.8s ease forwards",
-    },
-    title: { marginBottom: "30px", color: "#333", fontWeight: 600 },
-    inputGroup: { position: "relative", marginBottom: "30px" },
-    input: {
-      width: "100%",
-      padding: "12px 10px",
-      fontSize: "16px",
-      border: "1px solid #ccc",
-      borderRadius: "8px",
-      outline: "none",
-      transition: "all 0.3s",
-      background: "none",
-    },
-    label: {
-      position: "absolute",
-      left: "10px",
-      top: "12px",
-      background: "#fff",
-      color: "#aaa",
-      padding: "0 5px",
-      transition: "all 0.3s",
-      pointerEvents: "none",
-    },
-    button: {
-      width: "100%",
-      padding: "12px",
-      border: "none",
-      borderRadius: "8px",
-      background: "linear-gradient(90deg, #4f46e5, #6d28d9)",
-      color: "#fff",
-      fontSize: "16px",
-      cursor: "pointer",
-      transition: "all 0.4s",
-    },
+    const data = await res.json();
+    alert(data.message);
+    setFormData({ name: "", email: "", password: "" });
   };
 
   return (
-    <div style={styles.container}>
-      <form style={styles.form} onSubmit={handleSubmit}>
-        <h2 style={styles.title}>Modern Animated Form</h2>
+    <div className="page">
+      <form className="card" onSubmit={handleSubmit}>
+        <h1>Create Account</h1>
+        <p>Join us and get started</p>
 
-        <div style={styles.inputGroup}>
+        <div className="field">
           <input
             type="text"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
-            placeholder=" "
-            style={styles.input}
           />
-          <label style={styles.label}>Name</label>
+          <label>Full Name</label>
         </div>
 
-        <div style={styles.inputGroup}>
+        <div className="field">
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleChange}
             required
-            placeholder=" "
-            style={styles.input}
           />
-          <label style={styles.label}>Email</label>
+          <label>Email Address</label>
         </div>
 
-        <div style={styles.inputGroup}>
+        <div className="field">
           <input
             type="password"
             name="password"
             value={formData.password}
             onChange={handleChange}
             required
-            placeholder=" "
-            style={styles.input}
           />
-          <label style={styles.label}>Password</label>
+          <label>Password</label>
         </div>
 
-        <button type="submit" style={styles.button}>Submit</button>
+        <button>Create Account</button>
+
+        <span className="footer">
+          Already have an account? <b>Login</b>
+        </span>
       </form>
 
-      <style>
-        {`
-          @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(-20px); }
-            100% { opacity: 1; transform: translateY(0); }
-          }
+      {/* CSS */}
+      <style>{`
+        * {
+          box-sizing: border-box;
+          font-family: "Poppins", sans-serif;
+        }
 
-          input:focus + label,
-          input:not(:placeholder-shown) + label {
-            top: -10px !important;
-            left: 5px !important;
-            font-size: 12px !important;
-            color: #4f46e5 !important;
-          }
+        .page {
+          min-height: 100vh;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: linear-gradient(135deg, #6366f1, #9333ea);
+        }
 
-          input:focus {
-            border-color: #4f46e5 !important;
-            box-shadow: 0 0 5px rgba(79,70,229,0.3) !important;
-          }
+        .card {
+          width: 380px;
+          background: rgba(255, 255, 255, 0.9);
+          backdrop-filter: blur(12px);
+          border-radius: 18px;
+          padding: 40px;
+          box-shadow: 0 25px 40px rgba(0, 0, 0, 0.25);
+          animation: pop 0.6s ease;
+        }
 
-          button:hover {
-            background: linear-gradient(90deg, #6d28d9, #4f46e5) !important;
-            transform: scale(1.05) !important;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2) !important;
+        h1 {
+          margin: 0;
+          color: #111;
+          font-size: 28px;
+        }
+
+        p {
+          margin: 8px 0 30px;
+          color: #555;
+          font-size: 14px;
+        }
+
+        .field {
+          position: relative;
+          margin-bottom: 25px;
+        }
+
+        .field input {
+          width: 100%;
+          padding: 14px 12px;
+          border-radius: 10px;
+          border: 1px solid #ddd;
+          outline: none;
+          font-size: 15px;
+          background: transparent;
+          transition: 0.3s;
+        }
+
+        .field label {
+          position: absolute;
+          top: 50%;
+          left: 12px;
+          transform: translateY(-50%);
+          color: #999;
+          font-size: 14px;
+          pointer-events: none;
+          transition: 0.3s;
+          background: white;
+          padding: 0 6px;
+        }
+
+        .field input:focus,
+        .field input:not(:placeholder-shown) {
+          border-color: #6366f1;
+        }
+
+        .field input:focus + label,
+        .field input:not(:placeholder-shown) + label {
+          top: -8px;
+          font-size: 11px;
+          color: #6366f1;
+        }
+
+        button {
+          width: 100%;
+          padding: 14px;
+          border: none;
+          border-radius: 12px;
+          background: linear-gradient(90deg, #6366f1, #9333ea);
+          color: white;
+          font-size: 16px;
+          cursor: pointer;
+          transition: 0.3s;
+        }
+
+        button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .footer {
+          display: block;
+          margin-top: 20px;
+          text-align: center;
+          font-size: 13px;
+          color: #555;
+        }
+
+        @keyframes pop {
+          from {
+            opacity: 0;
+            transform: scale(0.9);
           }
-        `}
-      </style>
+          to {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      `}</style>
     </div>
   );
 }
-
-export default App;
